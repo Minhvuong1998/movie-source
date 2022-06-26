@@ -1,0 +1,398 @@
+swagger: "2.0"
+info:
+  description: "internview."
+  version: "1.0.0"
+  title: "Swagger Restful Api"
+schemes:
+- "http"
+paths:
+  /movie:
+    get:
+      tags:
+      - "movie"
+      summary: "Find movie by condition"
+      description: "Returns a list movie"
+      operationId: "findMovie"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+        - name: "title"
+          in: "query"
+          description: "filter movie by title"
+          required: false
+          type: "string"
+          format: "string"
+        - name: "sortField"
+          in: "query"
+          description: "filter movie by sortField"
+          required: false
+          type: "integer"
+          format: "int64"
+        - name: "sortOrder"
+          in: "query"
+          description: "filter movie by sortOrder"
+          required: false
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/Movie"
+        "404":
+          description: "not found"
+    post:
+      tags:
+      - "movie"
+      summary: "create a movie in the store with form data"
+      description: ""
+      operationId: "createMovieWithForm"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "title"
+        in: "formData"
+        description: "Title of the movie"
+        required: true
+        type: "string"
+        format: "string"
+      - name: "rating"
+        in: "formData"
+        description: "Rating of the movie"
+        required: true
+        type: "integer"
+        format: "int"
+      - name: "genres"
+        in: "formData"
+        description: "Genres of the movie"
+        required: true
+        type: "integer"
+        format: "int"
+      - name: "popularity"
+        in: "formData"
+        description: "Popularity of the movie"
+        required: true
+        type: "string"
+        format: "string"
+      - name: "language"
+        in: "formData"
+        description: "Language of the movie"
+        required: false
+        type: "string"
+        format: "string"
+      - name: "poster_image"
+        in: "formData"
+        description: "Backdrop image of the movie"
+        required: true
+        type: "file"
+        format: "file"
+      - name: "backdrop_image"
+        in: "formData"
+        description: "Backdrop image of the movie"
+        required: true
+        type: "file"
+        format: "file"
+      responses:
+        "400":
+          description: "Invalid input"
+        "500":
+          description: "Server error"
+        "201":
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/CreateMovie"
+  /movie/{id}:
+    put:
+      tags:
+      - "movie"
+      summary: "Updates a movie in the store with form data"
+      description: ""
+      operationId: "updateMovieWithForm"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the movie"
+        required: true
+        type: "string"
+        format: "string"
+      - name: "title"
+        in: "formData"
+        description: "Title of the movie"
+        required: true
+        type: "string"
+        format: "string"
+      - name: "rating"
+        in: "formData"
+        description: "Rating of the movie"
+        required: true
+        type: "integer"
+        format: "int"
+      - name: "genres"
+        in: "formData"
+        description: "Genres of the movie"
+        required: true
+        type: "integer"
+        format: "int"
+      - name: "popularity"
+        in: "formData"
+        description: "Popularity of the movie"
+        required: true
+        type: "string"
+        format: "string"
+      - name: "language"
+        in: "formData"
+        description: "Language of the movie"
+        required: false
+        type: "string"
+        format: "string"
+      - name: "poster_image"
+        in: "formData"
+        description: "Backdrop image of the movie"
+        required: true
+        type: "file"
+        format: "file"
+      - name: "backdrop_image"
+        in: "formData"
+        description: "Backdrop image of the movie"
+        required: true
+        type: "file"
+        format: "file"
+      responses:
+        "400":
+          description: "Invalid input"
+        "500":
+          description: "Server error"
+        "204":
+          description: "No content"
+        "404":
+          description: "ID movie not found"
+    delete:
+      tags:
+      - "movie"
+      summary: "Deletes a movie"
+      description: ""
+      operationId: "deleteMovie"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the movie"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        "404":
+          description: "ID movie not found"
+        "204":
+          description: "No content"
+    get:
+      tags:
+      - "movie"
+      summary: "Get movie by ID"
+      description: ""
+      operationId: "findOneMovie"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the movie"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        "404":
+          description: "ID movie not found"
+        "204":
+          description: "No content"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/GetMoveById"
+  /auth/login:
+    post:
+      tags:
+      - "auth"
+      summary: "login"
+      description: ""
+      operationId: "loginWithForm"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: "formData"
+        description: "Email of the user"
+        required: true
+        type: "string"
+        format: "string"
+      - name: "password"
+        in: "formData"
+        description: "Password of the user"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        "404":
+          description: "ID movie not found"
+        "200":
+          description: "No content"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/Login"
+  /auth/register:
+    post:
+      tags:
+      - "auth"
+      summary: "login"
+      description: ""
+      operationId: "registerWithForm"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: "formData"
+        description: "Email of the user"
+        required: true
+        type: "string"
+        format: "string"
+      - name: "password"
+        in: "formData"
+        description: "Password of the user"
+        required: true
+        type: "string"
+        format: "string"
+      - name: "name"
+        in: "formData"
+        description: "Name of the user"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        "404":
+          description: "ID movie not found"
+        "200":
+          description: "No content"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/CreateUser"
+definitions:
+  Movie:
+    type: "object"
+    properties:
+      data:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            _id:
+              type: "string"
+              format: "string"
+            created_at:
+              type: "string"
+              format: "string"
+            title:
+              type: "string"
+              format: "string"
+            rating:
+              type: "integer"
+              format: "int64"
+            popularity:
+              type: "string"
+              format: "string"
+            poster_image:
+              type: "string"
+              format: "string"
+            backdrop_image:
+              type: "string"
+              format: "string"
+      totalCount:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Movie"
+  CreateMovie:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "string"
+    xml:
+      name: "CreateMovie"
+  CreateUser:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "string"
+    xml:
+      name: "CreateMovie"
+  GetMoveById:
+    type: "object"
+    properties:
+      language:
+        type: "integer"
+        format: "int64"
+      _id:
+        type: "string"
+        format: "string"
+      title:
+        type: "string"
+        format: "string"
+      rating:
+        type: "integer"
+        format: "int64"
+      popularity:
+        type: "string"
+        format: "string"
+      poster_image:
+        type: "string"
+        format: "string"
+      backdrop_image:
+        type: "string"
+        format: "string"
+    xml:
+      name: "GetMoveById"
+  Login:
+    type: "object"
+    properties:
+      authority:
+        type: "integer"
+        format: "int64"
+      _id:
+        type: "string"
+        format: "string"
+      name:
+        type: "string"
+        format: "string"
+      email:
+        type: "integer"
+        format: "int64"
+      token:
+        type: "string"
+        format: "string"
+    xml:
+      name: "Login"

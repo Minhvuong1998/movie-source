@@ -1,0 +1,9 @@
+import { UNAUTHORIZED } from 'http-status';
+
+export default class UnauthorizedError extends Error {
+  public status: number;
+  constructor(message: string) {
+    super(message);
+    this.status = UNAUTHORIZED;
+  }
+}

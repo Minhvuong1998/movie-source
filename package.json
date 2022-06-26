@@ -1,0 +1,52 @@
+{
+  "name": "movie-source",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dst/server.js",
+  "scripts": {
+    "start": "node dst/server.js",
+    "build": "rimraf dst/ && tsc",
+    "check": "eslint --ext .ts src/ && prettier --check src/",
+    "fix": "eslint --ext .ts --fix",
+    "format": "prettier --write src/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/lodash": "^4.14.182",
+    "@types/multer": "^1.4.7",
+    "@types/nodemailer": "^6.4.4",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "prettier": "2.2.1",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.0",
+    "http-status": "^1.5.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "module-alias": "^2.2.2",
+    "mongoose": "^5.13.14",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.7.5",
+    "rimraf": "^3.0.2",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "_moduleAliases": {
+    "@validators": "dst/validators",
+    "@controllers": "dst/controllers",
+    "@middlewares": "dst/middleware",
+    "@factory": "dst/factory"
+  }
+}
